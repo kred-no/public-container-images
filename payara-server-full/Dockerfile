@@ -14,7 +14,9 @@ USER payara
 
 ENV X_ADMIN_PASSWORD= \
     X_ENABLE_SECURE_ADMIN= \
-    X_LOGBACK_CONFIG_FILE=
+    X_LOGBACK_CONFIG_FILE= \
+    X_DISABLE_HAZELCAST= \
+    X_HOTFIX_1_ENABLED=
 
 COPY --chown=payara:payara [ "./scripts/offline-configuration.sh", "/opt/payara/scripts/init_2_offline-configuration.sh" ]
 COPY --chown=payara:payara [ "./scripts/online-configuration.sh", "/opt/payara/scripts/init_3_online-configuration.sh" ]
