@@ -11,18 +11,15 @@ Dockerfile (Github): https://raw.githubusercontent.com/kred-no/public-container-
 
 Creates a new image, based on official Payara docker image builds, with the following changes:
 
-```text
   1. Generate Norwegian locale (req. root privileges)
-  
-  2. Adds optional startup-scripts. Run by setting the corresponding environment variable(s):
-
+  1. Enable secure-admin and disable hazelcast (bug) by default.
+  1. Optional startup-scripts. Run by setting the corresponding environment variable(s):
     * X_ADMIN_PASSWORD => Change Admin-password
-    * X_ENABLE_SECURE_ADMIN => Enables secure-admin
+    * X_ENABLE_HAZELCAST => Enables secure-admin
+    * X_DISABLE_SECURE_ADMIN => Enables secure-admin
     * X_LOGBACK_CONFIG_FILE => Add Logback jvm-configuration-entry
-  
-  3. Adds hotfix(es)/workarounds:
-    * X_HOTFIX_1_ENABLED
-```
+  1. Optional hotfixes/workarounds:
+    * X_HOTFIX_<#>_ENABLED
 
 ## Example use
 

@@ -13,12 +13,20 @@ RUN set -x \
 USER payara
 
 ENV X_ADMIN_PASSWORD= \
-    X_ENABLE_SECURE_ADMIN= \
-    X_LOGBACK_CONFIG_FILE= \
-    X_DISABLE_HAZELCAST=
+    X_DISABLE_SECURE_ADMIN= \
+    X_ENABLE_HAZELCAST= \
+    X_LOGBACK_CONFIG_FILE=
 
 ENV X_HOTFIX_1_ENABLED= \
     X_HOTFIX_2_ENABLED=
+
+RUN set -x \
+  && COMMAND="$PAYARA_DIR/bin/asadmin --user $ADMIN_USER --passwordfile=$PASSWORD_FILE" \
+  && $COMMAND start-domain $DOMAIN_NAME \
+  && $COMMAND enable-secure-admin \
+  && $COMMAND set-hazelcast-configuration --enabled=false \
+  && $COMMAND stop-domain --kill=true $DOMAIN_NAME \
+  && unset COMMAND
 
 COPY --chown=payara:payara --chmod=0550 [ "./scripts/offline-configuration.sh", "/opt/payara/scripts/init_2_offline-configuration.sh" ]
 COPY --chown=payara:payara --chmod=0550 [ "./scripts/online-configuration.sh", "/opt/payara/scripts/init.d/online-configuration.sh" ]
