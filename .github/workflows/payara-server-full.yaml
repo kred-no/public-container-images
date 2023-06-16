@@ -27,6 +27,7 @@ jobs:
         name: ["payara/server-full"]
         tag:
         - 6.2023.6-jdk17
+        - 5.2022.5-jdk17
         exclude: []
     steps:
     -
