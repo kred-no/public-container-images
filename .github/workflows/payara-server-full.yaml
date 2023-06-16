@@ -55,11 +55,11 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: |
-          ${{ env.DOCKERHUB_REGISTRY }}/{{ env.DOCKERHUB_IMAGE }}
-        #  ${{ env.GITHUB_REGISTRY }}/{{ env.GITHUB_IMAGE }}
+          ${{ env.DOCKERHUB_REGISTRY }}/${{ env.DOCKERHUB_IMAGE }}
+        #  ${{ env.GITHUB_REGISTRY }}/${{ env.GITHUB_IMAGE }}
         tags: |
-          type=raw,value={{ matrix.tag }},enable=true
-          type=raw,value=latest,prefix={{ matrix.tag }},enable={{ is_default_branch }}
+          type=raw,value=${{ matrix.tag }},enable=true
+          type=raw,value=latest,prefix=${{ matrix.tag }},enable={{ is_default_branch }}
     -
       name: Build and Push
       uses: docker/build-push-action@v4
