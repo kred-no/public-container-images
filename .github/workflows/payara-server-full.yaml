@@ -27,7 +27,9 @@ jobs:
         name: ["payara/server-full"]
         tag:
         - 6.2023.6-jdk17
+        - 6.2023.6-jdk11
         - 5.2022.5-jdk17
+        - 5.2022.5-jdk11
         exclude: []
     steps:
     -
@@ -60,7 +62,7 @@ jobs:
         #  ${{ env.GITHUB_REGISTRY }}/${{ env.GITHUB_IMAGE }}
         tags: |
           type=raw,value=${{ matrix.tag }},enable=true
-          type=raw,value=latest,prefix=${{ matrix.tag }}-,enable={{ is_default_branch }}
+        #  type=raw,value=latest,prefix=${{ matrix.tag }}-,enable={{ is_default_branch }}
     -
       name: Build and Push
       uses: docker/build-push-action@v4
