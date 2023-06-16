@@ -15,9 +15,11 @@ USER payara
 ENV X_ADMIN_PASSWORD= \
     X_ENABLE_SECURE_ADMIN= \
     X_LOGBACK_CONFIG_FILE= \
-    X_DISABLE_HAZELCAST= \
-    X_HOTFIX_1_ENABLED=
+    X_DISABLE_HAZELCAST=
 
-COPY --chown=payara:payara [ "./scripts/offline-configuration.sh", "/opt/payara/scripts/init_2_offline-configuration.sh" ]
-COPY --chown=payara:payara [ "./scripts/online-configuration.sh", "/opt/payara/scripts/init_3_online-configuration.sh" ]
-COPY --chown=payara:payara [ "./scripts/hotfixes.sh", "/opt/payara/scripts/init.d/hotfixes.sh" ]
+ENV X_HOTFIX_1_ENABLED= \
+    X_HOTFIX_2_ENABLED=
+
+COPY --chown=payara:payara --chmod=0550 [ "./scripts/offline-configuration.sh", "/opt/payara/scripts/init_2_offline-configuration.sh" ]
+COPY --chown=payara:payara --chmod=0550 [ "./scripts/online-configuration.sh", "/opt/payara/scripts/init.d/online-configuration.sh" ]
+COPY --chown=payara:payara --chmod=0550 [ "./scripts/hotfixes.sh", "/opt/payara/scripts/init.d/hotfixes.sh" ]
